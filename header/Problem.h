@@ -9,6 +9,9 @@ class Problem{
         int size;
         vector<vector<int>> initial_state;
         vector<vector<int>> goal_state;
+        vector<vector<int>> goal_pos;
+
+        void createGoalState();
 
     public:
         Problem();
