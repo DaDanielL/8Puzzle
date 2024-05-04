@@ -1,5 +1,6 @@
 #include "../header/NPuzzleSolver.h"
 #include "../header/Problem.h"
+#include "../header/State.h"
 #include <iostream>
 #include <queue>
 #include <set>

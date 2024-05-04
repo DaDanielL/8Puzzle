@@ -25,6 +25,10 @@ class State{
         int getHeuristic(){
             return heuristic;
         }
+
+        bool operator<(const State& lhs, const State& rhs){
+            return (lhs.cost + lhs.heuristic) < (rhs.cost + rhs.heuristic) 
+        }
 };
 
 #endif
