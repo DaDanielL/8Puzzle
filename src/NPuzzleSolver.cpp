@@ -4,13 +4,14 @@
 #include <iostream>
 #include <queue>
 #include <set>
+#include <algorithm>
 
 using namespace std;
 
 bool NPuzzleSolver::UniformCostSearch(Problem p){
 
     int node_expanded = 0;
-    int max_queue_size = 0;
+    int max_queue_size = 1;
     int goal_depth = 0;
 
     // Initialize frontier to initial state
@@ -46,7 +47,11 @@ bool NPuzzleSolver::UniformCostSearch(Problem p){
 
         // if node is goal return solution
         if(p.goalReached(leaf.getState())){
+            goal_depth = leaf.getCost();
             cout << "Goal!!" << endl << endl;
+            cout << "To solve this problem, the search algorithm expanded a total of " << node_expanded << " nodes" << endl;
+            cout << "The maximum of nodes in queue at any time: " << max_queue_size << endl;
+            cout << "The depth of the goal node was: " << goal_depth << endl;
             return true;
         }
 
@@ -54,11 +59,15 @@ bool NPuzzleSolver::UniformCostSearch(Problem p){
         explored_set.insert(leaf.getState());
 
         // expand, add results nodes to frontier if not in explored set
+        node_expanded++;
         set<vector<vector<int>>> allChildren = p.allOperator(leaf.getState());
 
         for(auto itr = allChildren.begin(); itr != allChildren.end(); itr++){
             if(explored_set.find(*itr) == explored_set.end()){
                 frontier.push(State(*itr, leaf.getCost()+1, 0));                // g(n) = g(n) of parent + 1, h(n) = 0
+
+                // check for max_queue_size
+                max_queue_size = max((int) max_queue_size, (int) frontier.size());
             }
         }
         
