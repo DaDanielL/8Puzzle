@@ -59,6 +59,9 @@
         "variant": "cpp",
         "vector": "cpp",
         "algorithm": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "__tree": "cpp",
+        "set": "cpp",
+        "iostream": "cpp"
     }
 }

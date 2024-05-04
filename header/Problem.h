@@ -2,6 +2,7 @@
 #define PROBLEM_HPP
 
 #include <vector>
+#include <set>
 using namespace std;
 
 class Problem{
@@ -21,6 +22,7 @@ class Problem{
         vector<vector<int> > down(vector<vector<int> > curState);
         vector<vector<int> > left(vector<vector<int> > curState);
         vector<vector<int> > right(vector<vector<int> > curState);
+        set<vector<vector<int>>> allOperator(vector<vector<int> > curState);
 
         int manhattanDist(vector<vector<int> > curState);
         double euclidDist(vector<vector<int> > curState);
@@ -31,6 +33,9 @@ class Problem{
 
         vector<vector<int>> getInitialState(){
             return this->initial_state;
+        }
+        vector<vector<int>> getGoalState(){
+            return this->goal_state;
         }
 };
 

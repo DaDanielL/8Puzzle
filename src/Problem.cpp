@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <cmath>
+#include <set>
 using namespace std;
 
 Problem::Problem(){     
@@ -43,63 +44,80 @@ void Problem::createGoalState(){
 
 vector<vector<int> > Problem::up(vector<vector<int> > curState){
     // find index of 0 or blank, swap with element
+    vector<vector<int>> newState = curState;
     for(unsigned int i = 0; i < this->size; i++){
         for(unsigned int j = 0; j < this->size; j++){
             if(curState[i][j] == 0){
                 if(i + 1 >= this->size){
                     return curState;
                 }else{
-                    curState[i][j] = curState[i+1][j];
-                    curState[i+1][j] = 0;
+                    newState[i][j] = curState[i+1][j];
+                    newState[i+1][j] = 0;
                 }
             }
         }
     }
+    return newState;
 }
 vector<vector<int> > Problem::down(vector<vector<int> > curState){
     // find index of 0 or blank, swap with element
+    vector<vector<int>> newState = curState;
     for(unsigned int i = 0; i < this->size; i++){
         for(unsigned int j = 0; j < this->size; j++){
             if(curState[i][j] == 0){
-                if(i - 1 <= this->size){
+                if(i <= 0){
                     return curState;
                 }else{
-                    curState[i][j] = curState[i-1][j];
-                    curState[i-1][j] = 0;
+                    newState[i][j] = curState[i-1][j];
+                    newState[i-1][j] = 0;
                 }
             }
         }
     }
+    return newState;
 }
 vector<vector<int> > Problem::left(vector<vector<int> > curState){
     // find index of 0 or blank, swap with element
+    vector<vector<int>> newState = curState;
     for(unsigned int i = 0; i < this->size; i++){
         for(unsigned int j = 0; j < this->size; j++){
             if(curState[i][j] == 0){
-                if(j - 1 <= this->size){
+                if(j <= 0){
                     return curState;
                 }else{
-                    curState[i][j] = curState[i][j-1];
-                    curState[i][j-1] = 0;
+                    newState[i][j] = curState[i][j-1];
+                    newState[i][j-1] = 0;
                 }
             }
         }
     }
+    return newState;
 }
 vector<vector<int> > Problem::right(vector<vector<int> > curState){
 // find index of 0 or blank, swap with element
+    vector<vector<int>> newState = curState;
     for(unsigned int i = 0; i < this->size; i++){
         for(unsigned int j = 0; j < this->size; j++){
             if(curState[i][j] == 0){
                 if(j + 1 >= this->size){
                     return curState;
                 }else{
-                    curState[i][j] = curState[i][j+1];
-                    curState[i][j+1] = 0;
+                    newState[i][j] = curState[i][j+1];
+                    newState[i][j+1] = 0;
                 }
             }
         }
     }
+    return newState;
+}
+
+set<vector<vector<int>>> Problem::allOperator(vector<vector<int>> curState){
+    set<vector<vector<int>>> s;
+    s.insert(right(curState));
+    s.insert(left(curState));
+    s.insert(up(curState));
+    s.insert(down(curState));
+    return s;
 }
 
 int Problem::manhattanDist(vector<vector<int> > curState){
@@ -163,6 +181,7 @@ void Problem::printState(vector<vector<int> > a){
         }
         cout<<"\n";
     }
+    cout<<"\n";
 }
 
 bool Problem::goalReached(vector<vector<int>> a){
