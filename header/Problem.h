@@ -23,7 +23,7 @@ class Problem{
         vector<vector<int> > right(vector<vector<int> > curState);
 
         int manhattanDist(vector<vector<int> > curState);
-        int euclidDist(vector<vector<int> > curState);
+        double euclidDist(vector<vector<int> > curState);
 };
 
 #endif

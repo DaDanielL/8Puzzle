@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <stdlib.h>
+#include <cmath>
 using namespace std;
 
 Problem::Problem(){     
@@ -116,6 +117,18 @@ int Problem::manhattanDist(vector<vector<int> > curState){
     }
     return d;
 }
-int Problem::euclidDist(vector<vector<int> > curState){
+double Problem::euclidDist(vector<vector<int> > curState){
+    double d = 0.0;
+    int actual_i;
+    int actual_j;
+    
+    for(unsigned int i = 0; i < curState.size(); i++){
+        for(unsigned int j = 0; j < curState.size(); j++){
+            actual_i = this->goal_pos[curState[i][j]][0];             // if curState[i][j] == 4, then the acutal position of 4 can be found at the index 4 of goal_state
+            actual_j = this->goal_pos[curState[i][j]][1]; 
 
+            d += sqrt(pow(actual_i - (int) i,2) + pow(actual_j - (int) j ,2));
+        }           
+    }
+    return d;
 }
