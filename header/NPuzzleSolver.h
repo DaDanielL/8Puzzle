@@ -10,7 +10,7 @@ class NPuzzleSolver{
 
 
     public:
-        void UniformCostSearch(Problem p);
+        bool UniformCostSearch(Problem p);
 
 };
 

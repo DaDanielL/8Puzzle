@@ -164,3 +164,7 @@ void Problem::printState(vector<vector<int> > a){
         cout<<"\n";
     }
 }
+
+bool Problem::goalReached(vector<vector<int>> a){
+    return statesEqual(a, this->goal_state);
+}

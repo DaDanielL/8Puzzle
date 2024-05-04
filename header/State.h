@@ -12,9 +12,9 @@ class State{
 
     public:
         State(vector<vector<int>> s, int c, int h){
-            this->state = state;
-            this->cost = cost;
-            this->heuristic = heuristic;
+            this->state = s;
+            this->cost = c;
+            this->heuristic = h;
         }
         vector<vector<int>> getState(){
             return state;
@@ -26,8 +26,12 @@ class State{
             return heuristic;
         }
 
-        bool operator<(const State& lhs, const State& rhs){
-            return (lhs.cost + lhs.heuristic) < (rhs.cost + rhs.heuristic) 
+        bool operator<(const State& rhs) const{
+            return (this->cost + this->heuristic) < (rhs.cost + rhs.heuristic);
+        }
+
+        bool operator>(const State& rhs) const{
+            return (this->cost + this->heuristic) > (rhs.cost + rhs.heuristic);
         }
 };
 
