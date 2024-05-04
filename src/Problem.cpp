@@ -132,3 +132,23 @@ double Problem::euclidDist(vector<vector<int> > curState){
     }
     return d;
 }
+
+bool Problem::statesEqual(vector<vector<int> > a, vector<vector<int> > b){
+    if(a.size() != b.size()){
+        return false;
+    }
+
+    for(unsigned int i = 0; i < a.size(); i++){
+        if(a[i].size() != b[i].size()){
+            return false;
+        }
+        for(unsigned int j = 0; j < a.size(); j++){
+            if(a[i][j] != b[i][j]){
+                return false;
+            }
+        }
+    }
+
+    return true;
+
+}

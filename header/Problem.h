@@ -24,6 +24,8 @@ class Problem{
 
         int manhattanDist(vector<vector<int> > curState);
         double euclidDist(vector<vector<int> > curState);
+
+        bool statesEqual(vector<vector<int> > a, vector<vector<int> > b);
 };
 
 #endif
