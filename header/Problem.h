@@ -26,6 +26,7 @@ class Problem{
         double euclidDist(vector<vector<int> > curState);
 
         bool statesEqual(vector<vector<int> > a, vector<vector<int> > b);
+        void printState(vector<vector<int> > s);
 };
 
 #endif
