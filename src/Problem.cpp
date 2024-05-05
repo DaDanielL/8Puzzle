@@ -178,10 +178,10 @@ bool Problem::statesEqual(vector<vector<int> > a, vector<vector<int> > b){
 void Problem::printState(vector<vector<int> > a){
     for(unsigned int i = 0; i < a.size(); i++){
         for(unsigned int j = 0; j < a.size(); j++){
-            /*if(a[i][j] == 0){
+            if(a[i][j] == 0){
                 cout << "b ";
                 continue;
-            }*/
+            }
             cout << a[i][j] << " ";
         }
         cout<<"\n";
