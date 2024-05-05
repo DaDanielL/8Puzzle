@@ -12,7 +12,6 @@ int main()
     vector<int> row_input;
     int num;
     Problem p;
-    NPuzzleSolver solver = NPuzzleSolver();
 
     cout<<"Welcome to Daniel Lin (862385642) 8 Puzzle solver."<<endl;
 
@@ -39,6 +38,7 @@ int main()
     }
     cout<<endl<<endl;
 
+    NPuzzleSolver solver = NPuzzleSolver(p);
     cout<<"Enter your choice of algorithm: "<<endl;
     cout<<"1. Uniform Cost Search" << endl;
     cout<<"2. A* with Manhattan Heuristic" << endl;
@@ -46,13 +46,13 @@ int main()
     cin>>alg_option;
     switch(alg_option){
         case 1:
-            solver.UniformCostSearch(p);
+            solver.UniformCostSearch();
             break;
         case 2:
-            solver.UniformCostSearch(p);
+            solver.AStarManhattanSearch();
             break;
         case 3:
-            solver.UniformCostSearch(p);
+            solver.AStarEuclidSearch();
             break;
         default:
             cout<<"Invalid Input."<<endl;
