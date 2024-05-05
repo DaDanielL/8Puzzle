@@ -82,7 +82,7 @@ bool NPuzzleSolver::AStarEuclidSearch(){
 
         for(auto itr = allChildren.begin(); itr != allChildren.end(); itr++){
             if(explored_set.find(*itr) == explored_set.end()){
-                frontier.push(State(*itr, leaf.getCost()+1, p.euclidDist(leaf.getState())));                // g(n) = g(n) of parent + 1, h(n) = euclid
+                frontier.push(State(*itr, leaf.getCost()+1, p.euclidDist(*itr)));                // g(n) = g(n) of parent + 1, h(n) = euclid
 
                 // check for max_queue_size
                 this->max_queue_size = max((int) this->max_queue_size, (int) frontier.size());
@@ -136,7 +136,7 @@ bool NPuzzleSolver::AStarManhattanSearch(){
 
         for(auto itr = allChildren.begin(); itr != allChildren.end(); itr++){
             if(explored_set.find(*itr) == explored_set.end()){
-                frontier.push(State(*itr, leaf.getCost()+1, p.manhattanDist(leaf.getState())));                // g(n) = g(n) of parent + 1, h(n) = manhattan
+                frontier.push(State(*itr, leaf.getCost()+1, p.manhattanDist(*itr)));                // g(n) = g(n) of parent + 1, h(n) = manhattan
 
                 // check for max_queue_size
                 this->max_queue_size = max((int) this->max_queue_size, (int) frontier.size());

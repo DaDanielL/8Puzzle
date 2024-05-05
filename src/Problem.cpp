@@ -22,7 +22,7 @@ Problem::Problem(vector<vector<int> > initial_state){
 
 void Problem::createGoalState(){
     // goal_state = {{1,2,3},{4,5,6},{7,8,0}}
-    // goal_pos = {{0,0},{0,1},{0,2},{1,0}...}
+    // goal_pos = {{2,2},{0,0},{0,1},{0,2},{1,0}...}
     // goal_pos keeps track of the pos of each number 0 - 8
 
     this->goal_state.resize(this->size, vector<int>(this->size));
@@ -113,10 +113,10 @@ vector<vector<int> > Problem::right(vector<vector<int> > curState){
 
 set<vector<vector<int>>> Problem::allOperator(vector<vector<int>> curState){
     set<vector<vector<int>>> s;
-    s.insert(right(curState));
-    s.insert(left(curState));
     s.insert(up(curState));
     s.insert(down(curState));
+    s.insert(left(curState));
+    s.insert(right(curState));
     return s;
 }
 
@@ -127,10 +127,12 @@ int Problem::manhattanDist(vector<vector<int> > curState){
     
     for(unsigned int i = 0; i < curState.size(); i++){
         for(unsigned int j = 0; j < curState.size(); j++){
-            actual_i = this->goal_pos[curState[i][j]][0];             // if curState[i][j] == 4, then the acutal position of 4 can be found at the index 4 of goal_state
-            actual_j = this->goal_pos[curState[i][j]][1]; 
+            if(curState[i][j] != 0){                                      // do not consider 0 or blank         
+                actual_i = this->goal_pos[curState[i][j]][0];             // if curState[i][j] == 4, then the acutal position of 4 can be found at the index 4 of goal_state
+                actual_j = this->goal_pos[curState[i][j]][1]; 
 
-            d += abs((int)(actual_i - i)) + abs((int)(actual_j - j));
+                d += abs((int)(actual_i - i)) + abs((int)(actual_j - j));
+            }
         }           
     }
     return d;
@@ -142,6 +144,9 @@ double Problem::euclidDist(vector<vector<int> > curState){
     
     for(unsigned int i = 0; i < curState.size(); i++){
         for(unsigned int j = 0; j < curState.size(); j++){
+            if(curState[i][j] == 0){
+                continue;                                             // do not consider 0 or blank
+            }
             actual_i = this->goal_pos[curState[i][j]][0];             // if curState[i][j] == 4, then the acutal position of 4 can be found at the index 4 of goal_state
             actual_j = this->goal_pos[curState[i][j]][1]; 
 
@@ -173,10 +178,10 @@ bool Problem::statesEqual(vector<vector<int> > a, vector<vector<int> > b){
 void Problem::printState(vector<vector<int> > a){
     for(unsigned int i = 0; i < a.size(); i++){
         for(unsigned int j = 0; j < a.size(); j++){
-            if(a[i][j] == 0){
+            /*if(a[i][j] == 0){
                 cout << "b ";
                 continue;
-            }
+            }*/
             cout << a[i][j] << " ";
         }
         cout<<"\n";
