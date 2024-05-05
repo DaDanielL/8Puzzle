@@ -5,6 +5,7 @@
 #include <queue>
 #include <set>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -37,6 +38,7 @@ void NPuzzleSolver::reset(){
     this->max_queue_size = 1;
     this->goal_depth = 0;
 }
+
 
 bool NPuzzleSolver::AStarEuclidSearch(){
     reset();
@@ -154,6 +156,9 @@ bool NPuzzleSolver::UniformCostSearch(){
     State init_state(this->p.getInitialState(), 0, 0);
     this->frontier.push(init_state);
     this->printInit();
+
+    // prev state to keep track for solution
+    State* prevState = nullptr;
     
     // Initialize explored set
     this->initExploredSet();
