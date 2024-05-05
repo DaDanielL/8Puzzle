@@ -16,7 +16,7 @@ class NPuzzleSolver{
         int node_expanded = 0;
         int max_queue_size = 1;
         int goal_depth = 0;
-        void initFrontier();
+        void printInit();
         void initExploredSet();
         void reset();
         void printResult();

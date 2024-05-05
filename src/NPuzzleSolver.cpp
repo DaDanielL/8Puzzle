@@ -8,10 +8,8 @@
 
 using namespace std;
 
-void NPuzzleSolver::initFrontier(){
+void NPuzzleSolver::printInit(){
     // Initialize frontier to initial state
-    State init_state(this->p.getInitialState(), 0, 0);
-    this->frontier.push(init_state);
 
     cout << "------------------------------" << endl;
     cout << "Doing Uniform Cost Search..." << endl << endl;
@@ -44,7 +42,9 @@ bool NPuzzleSolver::AStarEuclidSearch(){
     reset();
 
     // Initialize frontier to initial state
-    this->initFrontier();
+    State init_state(this->p.getInitialState(), 0, this->p.euclidDist(this->p.getInitialState()));
+    this->frontier.push(init_state);
+    this->printInit();
     
     // Initialize explored set
     this->initExploredSet();
@@ -61,7 +61,7 @@ bool NPuzzleSolver::AStarEuclidSearch(){
         this->frontier.pop();
 
         // print
-        cout << "The best state to expand with g(n) = " << leaf.getCost() << endl;
+        cout << "The best state to expand with g(n) = " << leaf.getCost() << " and h(n) = "<< leaf.getHeuristic() << endl;
         p.printState(leaf.getState());
 
 
@@ -77,6 +77,7 @@ bool NPuzzleSolver::AStarEuclidSearch(){
 
         // expand, add results nodes to frontier if not in explored set
         this->node_expanded++;
+        cout << "Expanding State... "<<endl<<endl;
         set<vector<vector<int>>> allChildren = p.allOperator(leaf.getState());
 
         for(auto itr = allChildren.begin(); itr != allChildren.end(); itr++){
@@ -95,7 +96,9 @@ bool NPuzzleSolver::AStarManhattanSearch(){
     reset();
 
     // Initialize frontier to initial state
-    this->initFrontier();
+    State init_state(this->p.getInitialState(), 0, this->p.manhattanDist(this->p.getInitialState()));
+    this->frontier.push(init_state);
+    this->printInit();
     
     // Initialize explored set
     this->initExploredSet();
@@ -112,7 +115,7 @@ bool NPuzzleSolver::AStarManhattanSearch(){
         this->frontier.pop();
 
         // print
-        cout << "The best state to expand with g(n) = " << leaf.getCost() << endl;
+        cout << "The best state to expand with g(n) = " << leaf.getCost() << " and h(n) = "<< leaf.getHeuristic() << endl;
         p.printState(leaf.getState());
 
 
@@ -128,6 +131,7 @@ bool NPuzzleSolver::AStarManhattanSearch(){
 
         // expand, add results nodes to frontier if not in explored set
         this->node_expanded++;
+        cout << "Expanding State... "<<endl<<endl;
         set<vector<vector<int>>> allChildren = p.allOperator(leaf.getState());
 
         for(auto itr = allChildren.begin(); itr != allChildren.end(); itr++){
@@ -147,7 +151,9 @@ bool NPuzzleSolver::UniformCostSearch(){
     reset();
 
     // Initialize frontier to initial state
-    this->initFrontier();
+    State init_state(this->p.getInitialState(), 0, 0);
+    this->frontier.push(init_state);
+    this->printInit();
     
     // Initialize explored set
     this->initExploredSet();
@@ -180,6 +186,7 @@ bool NPuzzleSolver::UniformCostSearch(){
 
         // expand, add results nodes to frontier if not in explored set
         this->node_expanded++;
+        cout << "Expanding State... "<<endl<<endl;
         set<vector<vector<int>>> allChildren = p.allOperator(leaf.getState());
 
         for(auto itr = allChildren.begin(); itr != allChildren.end(); itr++){
